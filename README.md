@@ -2,7 +2,7 @@
 
 Perl Simple Templating Language Implementation 
 
-Simple Template Language (stl) is purposely *almost* the simplest template language there can be whilst having some real world practical use just above straight up inserting of values into tags.
+Simple Template Language (stl) is purposely *almost* the simplest template language there can be whilst having some real world practical use just above the straight up inserting of values into tags.
 It is designed to save the effort of writing classes purely to template data with very minimal processing such as very few basic 'if' statements. 
 It is NOT designed to excuse you from writing code where you should do. If this doesn't do what you want it to do, you should probably be writing some code instead.
 
@@ -28,17 +28,21 @@ Notes and limitations:
 No parentheses or specified order of precedence for mixing and/or queries together. So Don't. 
 No else/elseif, you'll need separate expressions.
 + and | are logical NOT mathematical operators so no on-the-fly addition etc.
-Basic boolean testing HOWEVER: The ONLY false values by default are an empty string or a non-existent hash key (1) 
+Basic boolean testing HOWEVER: The ONLY false values by default are an empty string or a non-existent hash key (see (1) below) 
 You CANNOT nest {=if} tags.
-** - only ONE equality test per expression, which must be the last test you do (2) in the 'if' statement. 
+** - only ONE equality test per expression, which must be the last test you do ( see (2) below) in the 'if' statement. 
 
 Footnotes:
 ---------
 (1) - the __hasValue specifically allows 0 to pass as a truthy value rather than the default false. Type is not taken into account so 0 and '0' are treated the same. If you want 0 to be false edit the __hasValue function
+
 (2) - because it becomes far more complex to do this as a regex otherwise. Multiple splits on strings would work but this is not meant to be a whole language, just a very basic data templater. The fact that even one works when mixed with others was not planned just how the code came out.
-(3) - Why should 0 evaluate to true by default? Because this was written for parsing database records, which often contained 0 as a field value that I wanted to print and test on. Actual nulls you don't want to display should be converted to blank strings in the code before this part ran. Or, edit the __hasValue function to do your own test.
+
+(3) - Why should 0 evaluate to true by default? Because this was written for parsing database records, which often contained 0 as a field value that I wanted to print and test on. Actual nulls you don't want to display should be converted to blank strings in the code before this part ran. Or, to change as you see fit, edit the __hasValue function to do your own test.
 
 Example:
+--------
+
 $input = "Complex if: {=if value8+!value7+value9=something}Expression passed{=end if}";
 
 %keys = (
