@@ -190,5 +190,5 @@ $input = "Complex if: {=if value8+!value7+value9=something}Expression passed{=en
 
 $response = stl_parser::parse_stl($input,\%keys);
 
-print "REPONSE: " . $response . " END RESPONSE";
+print "RESPONSE: " . $response . " END RESPONSE";
 exit;
